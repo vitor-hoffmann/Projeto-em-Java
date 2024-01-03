@@ -1,0 +1,4 @@
+INDEX VERSION 1.134+C:\Users\Admin\Downloads\Shein-Aula-03-06 (1)\Shein-Aula-03-06\.metadata\.plugins\org.eclipse.jdt.core
+756251414.index
+3011209426.index
+1865797976.index

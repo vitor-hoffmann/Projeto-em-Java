@@ -1,0 +1,178 @@
+import java.util.*;
+
+public class Main{
+	
+	public static void main(String[] args) throws Exception {
+        Main mainInstance = new Main();
+        ArrayList<Produto> produtos = mainInstance.visualizarProdutos();
+        ArrayList<Conta_Cliente> contas = mainInstance.visualizarConta();
+        Scanner scanner = new Scanner(System.in);
+        int opcao;
+
+
+        do{
+            System.out.println("---------------MENU---------------");
+            System.out.println("1. Visualizar Conta");
+            System.out.println("2. Visualizar Pedido");
+            System.out.println("3. Ver Todos os Produtos");
+            System.out.println("4. Sair");
+            System.out.print("Escolha uma Opção: ");
+            opcao = scanner.nextInt();
+            switch(opcao){
+                case 1:
+                    mainInstance.exibirContas(contas);
+                    break;
+                case 2:
+                    System.out.println("Visualizar pedido");
+                    break;
+                case 3:
+                    mainInstance.exibirProdutos(produtos);
+                    break;
+                case 4:
+                    System.out.println("Saindo. Volte Sempre !");
+                    break;
+                default:
+                    System.out.println("Opção Inválida !");
+            }
+        }while(opcao != 4);
+   }
+
+   public ArrayList<Produto> visualizarProdutos() {
+    ArrayList<Produto> produtos = new ArrayList<>();
+    Random rand = new Random();
+    int z = 0;
+
+    while (produtos.size() < 15) {
+        Random random = new Random();
+        Bolsa bolsa = new Bolsa("\nBolsa " + (z + 1), String.valueOf((z + 1)), (z + 1) * random.nextInt(20), String.valueOf((z + 1)),
+                String.valueOf((z + 1)), String.valueOf((z + 1)), String.valueOf((z + 1)), z + 1, false, String.valueOf((z + 1)),
+                String.valueOf((z + 1)), (z + 1) * random.nextInt(20));
+        Acessorio acessorio = new Acessorio("\nAcessorio " + (z + 1), String.valueOf((z + 1)), (z + 1) * random.nextInt(20),
+                String.valueOf((z + 1)), String.valueOf((z + 1)), String.valueOf((z + 1)), String.valueOf((z + 1)), z + 1,
+                false, String.valueOf((z + 1)), "" + (z + 1), (z + 1) * random.nextInt(20));
+        Roupa roupa = new Roupa("\nRoupa " + (z + 1), String.valueOf((z + 1)), (z + 1) * random.nextInt(20), String.valueOf((z + 1)),
+                String.valueOf((z + 1)), String.valueOf((z + 1)), String.valueOf((z + 1)), z + 1, false, "" + (z + 1), "" + (z + 1),
+                (z + 1) * random.nextInt(20));
+        produtos.add(bolsa);
+        produtos.add(acessorio);
+        produtos.add(roupa);
+        z++;
+    }
+    return produtos;
+}
+
+public void exibirProdutos(ArrayList<Produto> produtos) {
+    HashMap<String, Integer> quantidadePorTipo = new HashMap<>();
+
+    // Contar a quantidade de cada tipo de produto
+    for (Produto produto : produtos) {
+        String tipo = produto.getClass().getSimpleName(); // Obtém o nome da classe (tipo de produto)
+        quantidadePorTipo.put(tipo, quantidadePorTipo.getOrDefault(tipo, 0) + 1);
+    }
+
+    // Exibir os produtos e suas quantidades
+    for (Produto produto : produtos) {
+        System.out.println(produto.toString() + " - Quantidade: " + quantidadePorTipo.get(produto.getClass().getSimpleName()));
+    }
+    /*  for (Produto produto : produtos) {
+        System.out.println(produto.toString());
+    }*/
+}
+
+public ArrayList<Conta_Cliente> visualizarConta() {
+    ArrayList<Conta_Cliente> contas = new ArrayList<>();
+    // ... Lógica para gerar a lista de contas ...
+    return contas;
+}
+
+public void exibirContas(ArrayList<Conta_Cliente> contas) {
+    // Usar um HashMap para contar a quantidade de cada conta
+    HashMap<String, Integer> quantidadePorCliente = new HashMap<>();
+
+    // Contar a quantidade de cada conta
+    for (Conta_Cliente conta : contas) {
+        String cliente = conta.getNome_conta(); // Substitua por um método que obtenha um identificador único do cliente
+        quantidadePorCliente.put(cliente, quantidadePorCliente.getOrDefault(cliente, 0) + 1);
+    }
+
+    // Exibir as contas e suas quantidades
+    for (Conta_Cliente conta : contas) {
+        System.out.println(conta.toString() + " - Quantidade: " + quantidadePorCliente.get(conta.getNome_conta()));
+    }
+}
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+        /*Endereco o = new Endereco();
+        o.cadastrarEndereco("72430-105", "Brasil", "Gama", "Setor Norte", "Conjunto E Casa 420", 0, "Distrito Federal", "Quadra 01");
+        System.out.println(o.visualizarEndereco());
+        
+        Bolsa a = new Bolsa("null", "null", 0, "null", "null", "null", "null", 0, false, "null", "null");
+        System.out.println(a.visualizarProduto());
+        
+        Pagamento a = new Pagamento();
+        if(a.adicionarPagamento("1234123412341234", "Vitor Valerio Hoffmann", "MasterCard","08/25",103)){
+            System.out.println(a.toString());
+        }else{
+            System.out.println("Erro ao criar pagamento!");
+        }
+        a.excluirPagamento(a);
+        System.out.println(a.toString());
+
+        ArrayList<Pagamento> pagamentos = new ArrayList<Pagamento>();
+        Pagamento b = new Pagamento();
+        Pagamento c = new Pagamento();
+        b.adicionarPagamento("1234123412341234", "Vitor Valerio Hoffmann", "MasterCard","08/25",103);
+        c.adicionarPagamento("1234123412341234", "Valerio Hoffmann", "MasterCard","08/25",103);
+        pagamentos.add(b);
+        pagamentos.add(c);
+        Conta_Cliente conta = new Conta_Cliente(pagamentos);
+        System.out.println(conta.toString());
+        Conta_Cliente conta1 = new Conta_Cliente("null", "null", "null", "null", "null", 0);
+        conta1.setBraco(31);
+        conta1.setBusto(86.5);
+        conta1.setCintura(75);
+        conta1.setComprimento_perna(86);
+        conta1.setQuadril(81);
+        System.out.println(conta1.retornar_tamanho());
+
+        Cupom c = new Cupom("null", 0, "null", 0, 0);
+        System.out.println(c.toString());
+        
+        Dados a = new Dados();
+        a.gerarDADOS();
+        System.out.println(a.visualizar());
+        Bolsa q = new Bolsa(null, null, 0, null, null, null, null, 0, false, null, null, 0);
+        Bolsa w = new Bolsa(null, null, 0, null, null, null, null, 0, false, null, null, 0);
+        Bolsa e = new Bolsa(null, null, 0, null, null, null, null, 0, false, null, null, 0);
+        Pagamento a = new Pagamento();
+        Endereco o = new Endereco();
+        ArrayList<Produto> produtospedido = new ArrayList<Produto>();
+        a.adicionarPagamento("1234123412341234", "Vitor Valerio Hoffmann", "MasterCard","08/25",103);
+        o.cadastrareditarEndereco("72430-105", "Brasil", "Gama", "Setor Norte", "Conjunto E Casa 420", 0, "Distrito Federal", "Quadra 01");
+        Pedido pedido = new Pedido(10, o, 1, a, produtospedido);
+        pedido.adicionarProduto(q);
+        pedido.adicionarProduto(w);
+        pedido.adicionarProduto(e);
+        System.out.println(pedido.toString());
+        Dados a = new Dados();
+        a.gerarDADOS();
+        System.out.println(a.buscarCategoria("2"));*/
+        
+
