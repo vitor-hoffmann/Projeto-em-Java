@@ -1,5 +1,5 @@
 # Shein
-Este repositório é destinado para o projeto do curso de Orientação a Objetos da Universidade de Brasília
+Este repositório é destinado para o projeto do curso de Orientação a Objetos da Universidade de Brasília <br>
 Para executa-lo, apenas abra o repositorio no cmd e digite o comando "java -jar shein.jar"
 
 
